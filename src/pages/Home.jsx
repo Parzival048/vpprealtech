@@ -6,6 +6,9 @@ import { useScrollReveal, useStaggeredReveal } from '../hooks/useScrollReveal';
 import { openWhatsApp } from '../utils/whatsapp';
 import { getFeaturedProjects } from '../services/projects';
 import logoImg from '../assets/vpppng.png';
+import client1 from '../assets/client1.png';
+import client2 from '../assets/client2.png';
+import client3 from '../assets/client3.png';
 import './Home.css';
 
 const buyerBenefits = [
@@ -57,6 +60,12 @@ const stats = [
     { value: '50+', label: 'Verified Projects' },
     { value: '5+', label: 'Years Experience' },
     { value: '₹100Cr+', label: 'Property Sold' },
+];
+
+const clientLogos = [
+    { name: 'Tapkir Patil Developers', logo: client1 },
+    { name: 'Aswani Promoters & Builders', logo: client2 },
+    { name: 'Aryan Developers', logo: client3 },
 ];
 
 export default function Home() {
@@ -245,6 +254,30 @@ export default function Home() {
                         {stats.map((stat, index) => (
                             <StatCard key={index} value={stat.value} label={stat.label} />
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Client Logos Section */}
+            <section className="clients-section">
+                <div className="container">
+                    <div className="section-header">
+                        <span className="section-eyebrow">Our Developer Partners</span>
+                        <h2 className="section-title">Trusted by Leading Developers</h2>
+                        <p className="section-subtitle">
+                            Partnering with premium real estate developers to bring you the best properties in Pune.
+                        </p>
+                    </div>
+
+                    <div className="clients-slider">
+                        <div className="clients-track">
+                            {/* Duplicate logos for infinite scroll effect */}
+                            {[...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => (
+                                <div key={index} className="client-logo">
+                                    <img src={client.logo} alt={client.name} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>

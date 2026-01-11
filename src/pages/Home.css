@@ -377,6 +377,93 @@
     opacity: 0.8;
 }
 
+/* Clients Section */
+.clients-section {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+    overflow: hidden;
+}
+
+.clients-slider {
+    margin-top: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.clients-slider::before,
+.clients-slider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.clients-slider::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-secondary), transparent);
+}
+
+.clients-slider::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-secondary), transparent);
+}
+
+.clients-track {
+    display: flex;
+    gap: 4rem;
+    animation: scroll 30s linear infinite;
+    width: max-content;
+}
+
+.clients-track:hover {
+    animation-play-state: paused;
+}
+
+.client-logo {
+    height: 80px;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.client-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.client-logo:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.client-logo:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-200px * 3 - 4rem * 3));
+    }
+}
+
 /* Benefits Section */
 .benefits-section {
     padding: 6rem 0;
@@ -612,6 +699,16 @@
 
     .stats-section {
         padding: 2.5rem 0;
+    }
+
+    .clients-section {
+        padding: 3rem 0;
+    }
+
+    .client-logo {
+        height: 60px;
+        min-width: 150px;
+        padding: 0.75rem 1.5rem;
     }
 
     .benefits-section {
