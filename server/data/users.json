@@ -1,0 +1,12 @@
+{
+    "users": [
+        {
+            "id": "admin-001",
+            "name": "Admin User",
+            "email": "admin@vpprealtech.com",
+            "password": "$2a$10$rqX8TQ7qQ0xJZvL3mZbQZuqwJsKv5kX.E6WqYg8Tz0gVcF.yTgZiC",
+            "role": "admin",
+            "createdAt": "2026-01-01T00:00:00.000Z"
+        }
+    ]
+}

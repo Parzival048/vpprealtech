@@ -1,0 +1,46 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return isAuthenticated();
+    }
+    
+    // Projects collection
+    match /projects/{projectId} {
+      // Anyone can read published projects
+      allow read: if resource.data.published == true;
+      
+      // Only authenticated admins can read unpublished projects
+      allow read: if isAdmin();
+      
+      // Only authenticated admins can write
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Leads collection
+    match /leads/{leadId} {
+      // Anyone can create a lead (from contact forms)
+      allow create: if true;
+      
+      // Only authenticated admins can read, update, delete
+      allow read, update, delete: if isAdmin();
+    }
+    
+    // Settings collection (for site settings)
+    match /settings/{document} {
+      // Anyone can read settings
+      allow read: if true;
+      
+      // Only authenticated admins can write
+      allow write: if isAdmin();
+    }
+  }
+}

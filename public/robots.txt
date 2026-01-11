@@ -1,0 +1,11 @@
+# robots.txt for VPP Realtech
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://your-domain.vercel.app/sitemap.xml
+
+# Disallow admin sections
+Disallow: /admin
+Disallow: /admin/*

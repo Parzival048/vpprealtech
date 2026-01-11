@@ -1,0 +1,158 @@
+/* Input Component Styles */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.input-field:focus {
+    background: var(--bg-primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.input-field::placeholder {
+    color: transparent;
+}
+
+.input-field--with-icon {
+    padding-left: 3rem;
+}
+
+.input-field--textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.input-field--select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.5rem;
+}
+
+/* Label */
+.input-label {
+    position: absolute;
+    left: 1.25rem;
+    top: 1rem;
+    font-size: 1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all var(--transition-fast);
+    background: transparent;
+    padding: 0;
+}
+
+.input-field:focus+.input-label,
+.input-field--filled+.input-label,
+.input-field:not(:placeholder-shown)+.input-label {
+    top: -0.5rem;
+    left: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--primary);
+    background: var(--bg-primary);
+    padding: 0 0.25rem;
+}
+
+.input-label--select {
+    top: -0.5rem;
+    left: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg-primary);
+    padding: 0 0.25rem;
+}
+
+.input-field--select:focus+.input-label--select,
+.input-field--select.input-field--filled+.input-label--select {
+    color: var(--primary);
+}
+
+/* Icon */
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+    z-index: 1;
+}
+
+.input-field:focus~.input-icon {
+    color: var(--primary);
+}
+
+/* Border Animation */
+.input-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: all var(--transition-fast);
+    transform: translateX(-50%);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.input-field:focus~.input-border {
+    width: 100%;
+}
+
+/* Required Indicator */
+.input-required {
+    color: var(--primary);
+    margin-left: 0.25rem;
+}
+
+/* Error State */
+.input-wrapper--error .input-field {
+    border-color: #ef4444;
+}
+
+.input-wrapper--error .input-label {
+    color: #ef4444;
+}
+
+.input-error {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #ef4444;
+}
+
+/* Select Arrow */
+.input-select-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: transform var(--transition-fast);
+}
+
+.input-field--select:focus~.input-select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+    color: var(--primary);
+}
+
+/* Disabled State */
+.input-field:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

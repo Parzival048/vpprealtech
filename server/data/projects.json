@@ -1,0 +1,270 @@
+{
+    "projects": [
+        {
+            "id": "proj-001",
+            "slug": "skyline-towers",
+            "title": "Skyline Towers",
+            "location": "Baner",
+            "address": "Survey No. 45, Near Balewadi High Street, Baner, Pune 411045",
+            "type": "Residential",
+            "status": "ongoing",
+            "priceRange": "₹85 Lakhs - ₹1.5 Crore",
+            "developer": "Premium Developers",
+            "reraId": "P52100034567",
+            "possession": "December 2025",
+            "configurations": [
+                "2 BHK",
+                "3 BHK",
+                "4 BHK"
+            ],
+            "sizes": "850 - 2200 sq.ft.",
+            "amenities": [
+                "Swimming Pool",
+                "Gym",
+                "Clubhouse",
+                "Children Play Area",
+                "Jogging Track",
+                "24x7 Security",
+                "Power Backup",
+                "Covered Parking"
+            ],
+            "overview": "Skyline Towers is a premium residential project located in the heart of Baner, one of Pune's most sought-after localities. The project offers thoughtfully designed apartments with modern amenities and excellent connectivity to IT hubs, schools, and hospitals.",
+            "highlights": [
+                "Prime location in Baner with excellent connectivity",
+                "Vastu-compliant floor plans",
+                "Premium specifications and finishes",
+                "Landscaped gardens and open spaces",
+                "Close to IT parks and commercial hubs"
+            ],
+            "images": [
+                "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
+            ],
+            "published": true,
+            "featured": true,
+            "budgetCategory": "1cr-2cr",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "updatedAt": "2026-01-01T00:00:00.000Z"
+        },
+        {
+            "id": "proj-002",
+            "slug": "tech-park-plaza",
+            "title": "Tech Park Plaza",
+            "location": "Hinjewadi",
+            "address": "Hinjewadi Phase 1, Near Infosys Campus, Pune 411057",
+            "type": "Commercial",
+            "status": "ready",
+            "priceRange": "₹1.2 Crore - ₹3.5 Crore",
+            "developer": "Vista Corp",
+            "reraId": "P52100045678",
+            "possession": "Ready to Move",
+            "configurations": [
+                "Office Spaces",
+                "Retail Shops",
+                "Showrooms"
+            ],
+            "sizes": "500 - 5000 sq.ft.",
+            "amenities": [
+                "High-speed Elevators",
+                "Central AC",
+                "Power Backup",
+                "Ample Parking",
+                "Food Court",
+                "Conference Rooms",
+                "Fire Safety",
+                "24x7 Security"
+            ],
+            "overview": "Tech Park Plaza is a Grade A commercial development in the IT corridor of Hinjewadi. Designed for modern businesses, it offers flexible office spaces with world-class infrastructure and amenities.",
+            "highlights": [
+                "Located in Pune's IT hub",
+                "Modern architecture with glass facade",
+                "Flexible floor plates for customization",
+                "Excellent visibility and frontage",
+                "Surrounded by major IT companies"
+            ],
+            "images": [
+                "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop"
+            ],
+            "published": true,
+            "featured": true,
+            "budgetCategory": "2cr-5cr",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "updatedAt": "2026-01-01T00:00:00.000Z"
+        },
+        {
+            "id": "proj-003",
+            "slug": "green-valley-villas",
+            "title": "Green Valley Villas",
+            "location": "Kharadi",
+            "address": "Near EON IT Park, Kharadi, Pune 411014",
+            "type": "Residential",
+            "status": "upcoming",
+            "priceRange": "₹2.5 Crore - ₹4 Crore",
+            "developer": "Greenscape Homes",
+            "reraId": "P52100056789",
+            "possession": "June 2027",
+            "configurations": [
+                "4 BHK Villa",
+                "5 BHK Villa"
+            ],
+            "sizes": "3500 - 5500 sq.ft.",
+            "amenities": [
+                "Private Garden",
+                "Swimming Pool",
+                "Clubhouse",
+                "Gym",
+                "Tennis Court",
+                "Jogging Track",
+                "24x7 Security",
+                "Solar Panels"
+            ],
+            "overview": "Green Valley Villas offers luxurious independent villas in the rapidly developing Kharadi area. Each villa features private gardens, modern architecture, and premium finishes.",
+            "highlights": [
+                "Independent luxury villas",
+                "Private gardens and parking",
+                "Close to EON IT Park",
+                "Premium specifications",
+                "Smart home features"
+            ],
+            "images": [
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
+            ],
+            "published": true,
+            "featured": true,
+            "budgetCategory": "2cr-5cr",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "updatedAt": "2026-01-01T00:00:00.000Z"
+        },
+        {
+            "id": "proj-004",
+            "slug": "sunrise-apartments",
+            "title": "Sunrise Apartments",
+            "location": "Wakad",
+            "address": "Near Datta Mandir, Wakad, Pune 411057",
+            "type": "Residential",
+            "status": "ongoing",
+            "priceRange": "₹45 Lakhs - ₹75 Lakhs",
+            "developer": "Sunrise Builders",
+            "reraId": "P52100067890",
+            "possession": "March 2026",
+            "configurations": [
+                "1 BHK",
+                "2 BHK"
+            ],
+            "sizes": "450 - 850 sq.ft.",
+            "amenities": [
+                "Gym",
+                "Children Play Area",
+                "Covered Parking",
+                "24x7 Security",
+                "Power Backup",
+                "Intercom"
+            ],
+            "overview": "Sunrise Apartments offers affordable yet quality homes in the well-connected locality of Wakad. Perfect for first-time homebuyers and young families.",
+            "highlights": [
+                "Affordable pricing",
+                "Well-connected location",
+                "Quality construction",
+                "Ready amenities",
+                "Close to schools and hospitals"
+            ],
+            "images": [
+                "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop"
+            ],
+            "published": true,
+            "featured": false,
+            "budgetCategory": "50l-1cr",
+            "createdAt": "2026-01-02T00:00:00.000Z",
+            "updatedAt": "2026-01-02T00:00:00.000Z"
+        },
+        {
+            "id": "proj-005",
+            "slug": "business-hub",
+            "title": "Business Hub",
+            "location": "Viman Nagar",
+            "address": "Near Phoenix Mall, Viman Nagar, Pune 411014",
+            "type": "Commercial",
+            "status": "ready",
+            "priceRange": "₹65 Lakhs - ₹1.2 Crore",
+            "developer": "Metro Developers",
+            "reraId": "P52100078901",
+            "possession": "Ready to Move",
+            "configurations": [
+                "Office Spaces",
+                "Showrooms"
+            ],
+            "sizes": "500 - 2000 sq.ft.",
+            "amenities": [
+                "High-speed Elevators",
+                "Power Backup",
+                "Ample Parking",
+                "Food Court",
+                "24x7 Security"
+            ],
+            "overview": "Business Hub is a premium commercial space located near Phoenix Mall in Viman Nagar. Ideal for retail, offices, and showrooms.",
+            "highlights": [
+                "Prime Viman Nagar location",
+                "Near Phoenix Mall",
+                "Ready to move spaces",
+                "Flexible configurations",
+                "High visibility"
+            ],
+            "images": [
+                "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop"
+            ],
+            "published": true,
+            "featured": false,
+            "budgetCategory": "1cr-2cr",
+            "createdAt": "2026-01-02T00:00:00.000Z",
+            "updatedAt": "2026-01-02T00:00:00.000Z"
+        },
+        {
+            "id": "proj-006",
+            "slug": "riverside-residency",
+            "title": "Riverside Residency",
+            "location": "Koregaon Park",
+            "address": "Near Osho Ashram, Koregaon Park, Pune 411001",
+            "type": "Residential",
+            "status": "upcoming",
+            "priceRange": "₹1.8 Crore - ₹3 Crore",
+            "developer": "Riverside Homes",
+            "reraId": "P52100089012",
+            "possession": "December 2027",
+            "configurations": [
+                "3 BHK",
+                "4 BHK"
+            ],
+            "sizes": "1800 - 3200 sq.ft.",
+            "amenities": [
+                "Riverside View",
+                "Swimming Pool",
+                "Gym",
+                "Clubhouse",
+                "Spa",
+                "24x7 Security",
+                "Concierge",
+                "Private Lifts"
+            ],
+            "overview": "Riverside Residency offers ultra-luxury apartments in the premium Koregaon Park area. Features stunning river views and world-class amenities.",
+            "highlights": [
+                "Premium Koregaon Park location",
+                "Stunning river views",
+                "Ultra-luxury specifications",
+                "Private lifts for each unit",
+                "Concierge services"
+            ],
+            "images": [
+                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop"
+            ],
+            "published": true,
+            "featured": false,
+            "budgetCategory": "2cr-5cr",
+            "createdAt": "2026-01-03T00:00:00.000Z",
+            "updatedAt": "2026-01-03T00:00:00.000Z"
+        }
+    ]
+}

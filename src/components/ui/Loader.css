@@ -1,0 +1,355 @@
+/* Premium Loader Styles */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-loader);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark);
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader--complete {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Logo */
+.loader__logo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
+}
+
+.loader__logo-icon {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+.loader__logo-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.loader__logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.loader__building {
+    fill: var(--primary);
+    opacity: 0;
+    animation: buildingRise 0.6s ease forwards;
+}
+
+.loader__building--1 {
+    animation-delay: 0.2s;
+}
+
+.loader__building--2 {
+    animation-delay: 0.4s;
+}
+
+.loader__building--3 {
+    animation-delay: 0.6s;
+}
+
+.loader__window {
+    fill: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: windowLight 0.3s ease forwards;
+    animation-delay: 0.8s;
+}
+
+.loader__logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+    animation: glowPulse 2s ease-in-out infinite;
+    z-index: 1;
+}
+
+/* Brand */
+.loader__brand {
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards 0.6s;
+}
+
+.loader__brand-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.1em;
+}
+
+.loader__brand-accent {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* Progress Bar */
+.loader__progress {
+    position: relative;
+    width: 280px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: visible;
+    margin-bottom: 1.5rem;
+}
+
+.loader__progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 2px;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.loader__progress-glow {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    border-radius: 50%;
+    transition: left 0.1s linear;
+}
+
+/* Loading Text */
+.loader__text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+}
+
+.loader__dot {
+    opacity: 0;
+    animation: dotBlink 1.4s infinite;
+}
+
+.loader__dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loader__dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loader__dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Background */
+.loader__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.loader__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
+}
+
+.loader__bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: patternMove 20s linear infinite;
+}
+
+/* Particles */
+.loader__particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.loader__particle--1 {
+    top: 20%;
+    left: 10%;
+    animation: particleFloat 8s ease-in-out infinite;
+}
+
+.loader__particle--2 {
+    top: 70%;
+    left: 80%;
+    animation: particleFloat 10s ease-in-out infinite reverse;
+}
+
+.loader__particle--3 {
+    top: 40%;
+    left: 90%;
+    animation: particleFloat 12s ease-in-out infinite;
+}
+
+.loader__particle--4 {
+    top: 80%;
+    left: 20%;
+    animation: particleFloat 9s ease-in-out infinite reverse;
+}
+
+/* Animations */
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes buildingRise {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes windowLight {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dotBlink {
+
+    0%,
+    20% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes patternMove {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(50px, 50px);
+    }
+}
+
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+
+    25% {
+        transform: translate(20px, -30px) scale(1.5);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translate(-10px, -60px) scale(1);
+        opacity: 0.3;
+    }
+
+    75% {
+        transform: translate(-30px, -30px) scale(1.2);
+        opacity: 0.5;
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .loader__logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .loader__brand-text,
+    .loader__brand-accent {
+        font-size: 1.75rem;
+    }
+
+    .loader__progress {
+        width: 200px;
+    }
+}

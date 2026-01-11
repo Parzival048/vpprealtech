@@ -1,0 +1,319 @@
+/* Buyers Page Styles */
+
+/* Hero */
+.buyers-hero {
+    position: relative;
+    padding: 10rem 0 6rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.buyers-hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+        var(--bg-primary);
+    z-index: -1;
+}
+
+.buyers-hero__content {
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.buyers-hero__content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.buyers-hero__eyebrow {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 107, 53, 0.1);
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.5rem;
+}
+
+.buyers-hero__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin-bottom: 1.5rem;
+}
+
+.buyers-hero__subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buyers-hero__actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Promise Section */
+.promise-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+}
+
+.promise-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.promise-card {
+    padding: 2rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    border: 1px solid var(--border-light);
+    transition: all var(--transition-base);
+}
+
+.promise-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.promise-card__icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.promise-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+}
+
+.promise-card p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+}
+
+/* Journey Section */
+.journey-section {
+    padding: 6rem 0;
+}
+
+.journey-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+
+.journey-timeline.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.journey-timeline::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+}
+
+.journey-step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.journey-timeline.visible .journey-step {
+    opacity: 1;
+}
+
+.journey-step__number {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 1;
+}
+
+.journey-step__content {
+    flex: 1;
+    padding-top: 1rem;
+}
+
+.journey-step__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.journey-step__description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Services Section */
+.services-section {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Form Section */
+.buyer-form-section {
+    padding: 6rem 0;
+}
+
+.buyer-form-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.buyer-form-info {
+    position: sticky;
+    top: 100px;
+}
+
+.buyer-form-info h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.buyer-form-info>p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.buyer-form-benefits {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.buyer-form-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    color: var(--text-secondary);
+}
+
+.buyer-form-benefits svg {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.buyer-form-whatsapp {
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.buyer-form-whatsapp p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.buyer-form {
+    padding: 2.5rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+}
+
+.buyer-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .promise-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .buyer-form-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .buyer-form-info {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .buyers-hero {
+        padding: 8rem 0 4rem;
+    }
+
+    .journey-timeline::before {
+        left: 30px;
+    }
+
+    .journey-step__number {
+        width: 60px;
+        height: 60px;
+    }
+
+    .journey-step {
+        gap: 1.5rem;
+    }
+
+    .buyer-form {
+        padding: 1.5rem;
+    }
+
+    .buyer-form__row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .promise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}

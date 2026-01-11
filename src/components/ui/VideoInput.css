@@ -1,0 +1,55 @@
+/* Video Input Component Styles */
+
+.video-input {
+    margin-bottom: 1.5rem;
+}
+
+.video-input__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.video-input__field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+}
+
+.video-input__field:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.video-input__field--error {
+    border-color: #dc2626;
+}
+
+.video-input__error {
+    margin-top: 0.5rem;
+    color: #dc2626;
+    font-size: 0.875rem;
+}
+
+.video-input__preview {
+    margin-top: 1rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.video-input__preview iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.video-input__hint {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
