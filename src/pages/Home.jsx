@@ -150,7 +150,7 @@ export default function Home() {
                                     <circle cx="9" cy="7" r="4" />
                                     <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
                                 </svg>
-                                <span>500+ Happy Clients</span>
+                                <span>100+ Happy Clients</span>
                             </div>
                         </div>
                     </div>
