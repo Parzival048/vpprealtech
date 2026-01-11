@@ -1,0 +1,193 @@
+/* EMI Calculator Styles */
+.emi-calculator {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.emi-calculator__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1A1A2E;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.emi-calculator__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e8e8ee;
+}
+
+.emi-input__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1A1A2E;
+    margin-bottom: 0.75rem;
+}
+
+.emi-input__value {
+    color: #FF6B35;
+    font-size: 1rem;
+}
+
+.emi-input__range {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #e8e8ee;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    margin-bottom: 0.5rem;
+}
+
+.emi-input__range::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FF6B35;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    transition: transform 0.2s;
+}
+
+.emi-input__range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.emi-input__range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FF6B35;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    border: none;
+}
+
+.emi-input__limits {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #8A8AA3;
+}
+
+.emi-results {
+    margin-bottom: 2rem;
+}
+
+.emi-result--primary {
+    background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.emi-result--primary .emi-result__label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.emi-result--primary .emi-result__value {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.emi-result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.emi-result {
+    text-align: center;
+}
+
+.emi-result__label {
+    font-size: 0.875rem;
+    color: #8A8AA3;
+    margin-bottom: 0.5rem;
+}
+
+.emi-result__value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1A1A2E;
+}
+
+.emi-result__value--interest {
+    color: #3B82F6;
+}
+
+.emi-chart {
+    padding-top: 2rem;
+    border-top: 1px solid #e8e8ee;
+}
+
+.emi-chart__pie {
+    max-width: 200px;
+    margin: 0 auto 1rem;
+}
+
+.emi-pie {
+    width: 100%;
+    height: auto;
+    transform: rotate(0deg);
+}
+
+.emi-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.emi-legend__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #1A1A2E;
+}
+
+.emi-legend__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.emi-legend__dot--principal {
+    background: #FF6B35;
+}
+
+.emi-legend__dot--interest {
+    background: #3B82F6;
+}
+
+@media (max-width: 640px) {
+    .emi-calculator {
+        padding: 1.5rem;
+    }
+
+    .emi-result--primary .emi-result__value {
+        font-size: 1.5rem;
+    }
+
+    .emi-result-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+}

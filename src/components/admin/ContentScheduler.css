@@ -1,0 +1,84 @@
+/* Content Scheduler Styles */
+.content-scheduler {
+    background: white;
+    border: 1px solid #e8e8ee;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.content-scheduler__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1A1A2E;
+    margin-bottom: 1rem;
+}
+
+.content-scheduler__inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.scheduler-input {}
+
+.scheduler-input__label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1A1A2E;
+    margin-bottom: 0.5rem;
+}
+
+.scheduler-input__field {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e8e8ee;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    color: #1A1A2E;
+    transition: border-color 0.2s;
+}
+
+.scheduler-input__field:focus {
+    outline: none;
+    border-color: #FF6B35;
+}
+
+.content-scheduler__preview {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(255, 107, 53, 0.05);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    color: #FF6B35;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.content-scheduler__preview svg {
+    flex-shrink: 0;
+}
+
+.content-scheduler__actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+    .content-scheduler__inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .content-scheduler__actions {
+        flex-direction: column-reverse;
+    }
+
+    .content-scheduler__actions button {
+        width: 100%;
+    }
+}

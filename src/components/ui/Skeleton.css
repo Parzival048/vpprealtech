@@ -1,0 +1,182 @@
+/* Skeleton Loader Styles */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 0px, #f8f8f8 40px, #f0f0f0 80px);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Skeleton Card */
+.skeleton-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.skeleton-card__image {
+    width: 100%;
+    height: 200px;
+}
+
+.skeleton-card__content {
+    padding: 1.5rem;
+}
+
+.skeleton-card__title {
+    height: 24px;
+    margin-bottom: 12px;
+    width: 70%;
+}
+
+.skeleton-card__text {
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.skeleton-card__text--short {
+    width: 40%;
+}
+
+/* Skeleton Text */
+.skeleton-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeleton-text__line {
+    height: 16px;
+}
+
+/* Skeleton Circle */
+.skeleton-circle {
+    border-radius: 50%;
+}
+
+.skeleton-circle--sm {
+    width: 32px;
+    height: 32px;
+}
+
+.skeleton-circle--md {
+    width: 48px;
+    height: 48px;
+}
+
+.skeleton-circle--lg {
+    width: 64px;
+    height: 64px;
+}
+
+/* Skeleton Button */
+.skeleton-button {
+    height: 44px;
+    width: 120px;
+    border-radius: 8px;
+}
+
+/* Skeleton Project Card */
+.skeleton-project-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.skeleton-project-card__image {
+    width: 100%;
+    height: 200px;
+}
+
+.skeleton-project-card__content {
+    padding: 20px;
+}
+
+.skeleton-project-card__badge {
+    height: 20px;
+    width: 80px;
+    margin-bottom: 12px;
+    border-radius: 20px;
+}
+
+.skeleton-project-card__title {
+    height: 24px;
+    width: 80%;
+    margin-bottom: 8px;
+}
+
+.skeleton-project-card__location {
+    height: 16px;
+    width: 50%;
+    margin-bottom: 12px;
+}
+
+.skeleton-project-card__price {
+    height: 20px;
+    width: 40%;
+}
+
+.skeleton-project-card__footer {
+    padding: 16px 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.skeleton-project-card__footer-text {
+    height: 16px;
+    width: 60%;
+}
+
+/* Skeleton Blog Card */
+.skeleton-blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.skeleton-blog-card__image {
+    width: 100%;
+    height: 200px;
+}
+
+.skeleton-blog-card__content {
+    padding: 1.5rem;
+}
+
+.skeleton-blog-card__category {
+    height: 18px;
+    width: 100px;
+    margin-bottom: 12px;
+}
+
+.skeleton-blog-card__title {
+    height: 24px;
+    width: 90%;
+    margin-bottom: 12px;
+}
+
+.skeleton-blog-card__text {
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.skeleton-blog-card__text--short {
+    width: 70%;
+}
+
+.skeleton-blog-card__meta {
+    height: 14px;
+    width: 50%;
+    margin-top: 16px;
+}

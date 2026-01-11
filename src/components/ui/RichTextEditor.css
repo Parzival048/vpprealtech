@@ -1,0 +1,156 @@
+/* Rich Text Editor Styles */
+.rte {
+    border: 1px solid #e8e8ee;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    transition: border-color 0.2s;
+}
+
+.rte--focused {
+    border-color: #FF6B35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.rte__toolbar {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e8e8ee;
+    flex-wrap: wrap;
+}
+
+.rte__toolbar-group {
+    display: flex;
+    gap: 0.25rem;
+    padding-right: 0.5rem;
+    border-right: 1px solid #e8e8ee;
+}
+
+.rte__toolbar-group:last-child {
+    border-right: none;
+}
+
+.rte__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 0.5rem;
+    background: white;
+    border: 1px solid #e8e8ee;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1A1A2E;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.rte__btn:hover {
+    background: #f8f9fa;
+    border-color: #FF6B35;
+    color: #FF6B35;
+}
+
+.rte__btn:active {
+    transform: scale(0.95);
+}
+
+.rte__editor {
+    min-height: 300px;
+    max-height: 600px;
+    padding: 1.5rem;
+    overflow-y: auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #1A1A2E;
+    outline: none;
+}
+
+.rte__editor:empty::before {
+    content: attr(data-placeholder);
+    color: #8A8AA3;
+    pointer-events: none;
+}
+
+/* Content Styles */
+.rte__editor h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.75rem;
+    color: #1A1A2E;
+}
+
+.rte__editor h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.625rem;
+    color: #1A1A2E;
+}
+
+.rte__editor p {
+    margin: 0.75rem 0;
+}
+
+.rte__editor ul,
+.rte__editor ol {
+    margin: 0.75rem 0;
+    padding-left: 2rem;
+}
+
+.rte__editor li {
+    margin: 0.375rem 0;
+}
+
+.rte__editor a {
+    color: #FF6B35;
+    text-decoration: underline;
+}
+
+.rte__editor img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.rte__editor strong {
+    font-weight: 700;
+}
+
+.rte__editor em {
+    font-style: italic;
+}
+
+.rte__editor u {
+    text-decoration: underline;
+}
+
+.rte__editor s {
+    text-decoration: line-through;
+}
+
+@media (max-width: 640px) {
+    .rte__toolbar {
+        padding: 0.5rem;
+        gap: 0.25rem;
+    }
+
+    .rte__toolbar-group {
+        padding-right: 0.25rem;
+    }
+
+    .rte__btn {
+        min-width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+
+    .rte__editor {
+        min-height: 200px;
+        padding: 1rem;
+    }
+}
