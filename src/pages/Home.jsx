@@ -53,10 +53,10 @@ const buyerBenefits = [
 ];
 
 const stats = [
-    { value: '500+', label: 'Happy Families' },
+    { value: '50+', label: 'Happy Families' },
     { value: '50+', label: 'Verified Projects' },
-    { value: '10+', label: 'Years Experience' },
-    { value: '₹200Cr+', label: 'Property Sold' },
+    { value: '5+', label: 'Years Experience' },
+    { value: '₹100Cr+', label: 'Property Sold' },
 ];
 
 export default function Home() {

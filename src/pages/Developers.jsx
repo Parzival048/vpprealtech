@@ -221,29 +221,6 @@ export default function Developers() {
                 </div>
             </section>
 
-            {/* Differentiators Section */}
-            <section className="differentiators-section">
-                <div className="container">
-                    <div className="differentiators-grid">
-                        <div className="differentiator-card">
-                            <div className="differentiator-card__icon">🎯</div>
-                            <h3>Single Point Accountability</h3>
-                            <p>One partner, one team, complete ownership of your sales targets.</p>
-                        </div>
-                        <div className="differentiator-card">
-                            <div className="differentiator-card__icon">📊</div>
-                            <h3>Data-Driven Decisions</h3>
-                            <p>Real-time dashboards and analytics to track every aspect of sales.</p>
-                        </div>
-                        <div className="differentiator-card">
-                            <div className="differentiator-card__icon">🤝</div>
-                            <h3>Aligned Incentives</h3>
-                            <p>Performance-based models that align our success with yours.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* CTA Form Section */}
             <section className="developer-form-section">
                 <div className="container">
