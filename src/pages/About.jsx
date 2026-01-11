@@ -45,7 +45,7 @@ const values = [
 
 const stats = [
     { value: '5+', label: 'Years Experience' },
-    { value: '50+', label: 'Happy Clients' },
+    { value: '100+', label: 'Happy Clients' },
     { value: '₹100Cr+', label: 'Property Sold' },
     { value: '50+', label: 'Developer Partners' },
 ];
