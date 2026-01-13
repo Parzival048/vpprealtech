@@ -313,7 +313,7 @@ export default function Home() {
                 <div className="container">
                     <div className="section-header">
                         <span className="section-eyebrow">Featured Properties</span>
-                        <h2 className="section-title">Explore Our Projects</h2>
+                        <h2 className="section-title">Featured Projects</h2>
                         <p className="section-subtitle">
                             Handpicked, verified properties across Pune's prime locations.
                         </p>

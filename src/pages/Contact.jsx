@@ -96,8 +96,9 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <h3>Call Us</h3>
-                                    <p><a href="tel:+919876543210">+91 98765 43210</a></p>
-                                    <p><a href="tel:+912012345678">+91 20 1234 5678</a></p>
+                                    <p><a href="tel:+917507007875">+91 75070 07875</a></p>
+                                    <p><a href="tel:+917020637569">+91 70206 37569</a></p>
+                                    <p><a href="tel:+919307001028">+91 93070 01028</a></p>
                                 </div>
                             </div>
 
@@ -191,15 +192,35 @@ export default function Contact() {
                                     rows={5}
                                     required
                                 />
-                                <Button
-                                    type="submit"
-                                    variant="primary"
-                                    size="lg"
-                                    fullWidth
-                                    loading={isSubmitting}
-                                >
-                                    Send Message
-                                </Button>
+                                <div className="contact-form__actions">
+                                    <Button
+                                        type="submit"
+                                        variant="primary"
+                                        size="lg"
+                                        fullWidth
+                                        loading={isSubmitting}
+                                    >
+                                        Send Message
+                                    </Button>
+                                    <WhatsAppButton
+                                        type="button"
+                                        size="lg"
+                                        fullWidth
+                                        onClick={() => {
+                                            if (formData.name && formData.phone) {
+                                                openWhatsApp({
+                                                    type: 'contact-form',
+                                                    formData: formData,
+                                                    source: 'contact-page'
+                                                });
+                                            } else {
+                                                alert('Please fill in at least your name and phone number first.');
+                                            }
+                                        }}
+                                    >
+                                        Submit via WhatsApp
+                                    </WhatsAppButton>
+                                </div>
                             </form>
                         </div>
                     </div>

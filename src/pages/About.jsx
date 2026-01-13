@@ -62,10 +62,9 @@ export default function About() {
                 <div className="container">
                     <div className={`about-hero__content ${heroVisible ? 'visible' : ''}`}>
                         <span className="about-hero__eyebrow">About Us</span>
-                        <h1 className="about-hero__title">Your Trusted Real Estate Partner in Pune</h1>
+                        <h1 className="about-hero__title">Built on Trust, Driven by Execution</h1>
                         <p className="about-hero__subtitle">
-                            For over a decade, we've been helping families find their dream homes
-                            and developers achieve their sales goals.
+                            Clarity for Buyers. Results for Developers.
                         </p>
                     </div>
                 </div>
@@ -94,25 +93,18 @@ export default function About() {
                         </div>
                         <div className="about-story__content">
                             <span className="section-eyebrow">Our Story</span>
-                            <h2>Built on Trust, Driven by Results</h2>
+                            <h2>Built on Trust, Driven by Execution</h2>
                             <p>
-                                VPP Realtech was founded with a simple belief: real estate transactions
-                                should be transparent, stress-free, and rewarding for everyone involved.
+                                At VPP Realtech, we believe real estate transactions should be driven by clarity,
+                                accountability, and results. Based in Pune, we operate as a real estate advisory
+                                and mandate sales partner, supporting homebuyers with honest guidance and developers
+                                with end-to-end sales execution.
                             </p>
                             <p>
-                                Starting as a small advisory firm in Pune, we've grown into a trusted
-                                name in the real estate industry. Our approach has always been different
-                                — we focus on building relationships, not just closing deals.
-                            </p>
-                            <p>
-                                Today, we serve two distinct segments: helping property buyers navigate
-                                the complex real estate market with honest guidance, and partnering with
-                                developers for exclusive mandate sales with complete accountability.
-                            </p>
-                            <p>
-                                Our success is measured not by the number of transactions, but by the
-                                trust our clients place in us, often returning for their next property
-                                or referring their friends and family.
+                                We collaborate closely with select developers as a mandate or sole selling partner,
+                                managing sales strategy, marketing coordination, and on-ground execution to ensure
+                                project success. For buyers, we offer curated, RERA-compliant properties backed by
+                                transparent advice and complete support.
                             </p>
                         </div>
                     </div>
@@ -138,8 +130,8 @@ export default function About() {
                 </div>
             </section>
 
-            {/* Team Section */}
-            <section className="about-team">
+            {/* Team Section - Hidden as per requirements */}
+            {/* <section className="about-team">
                 <div className="container">
                     <div className="section-header">
                         <span className="section-eyebrow">Meet the Team</span>
@@ -160,7 +152,7 @@ export default function About() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
         </main>
     );
 }

@@ -242,7 +242,7 @@ export default function Projects() {
         <main style={styles.page}>
             {/* Header */}
             <section style={styles.header} ref={headerRef}>
-                <h1 style={styles.headerTitle}>Our Projects</h1>
+                <h1 style={styles.headerTitle}>Featured Projects</h1>
                 <p style={styles.headerSubtitle}>
                     Discover verified, premium properties across Pune's most sought-after locations.
                 </p>

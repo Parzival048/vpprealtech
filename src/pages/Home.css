@@ -432,24 +432,13 @@
     background: white;
     border-radius: var(--radius-lg);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
 }
 
 .client-logo img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: all 0.3s ease;
-}
-
-.client-logo:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
-}
-
-.client-logo:hover img {
+    /* Removed grayscale filter and reduced opacity - logos now show in full color */
     filter: grayscale(0%);
     opacity: 1;
 }

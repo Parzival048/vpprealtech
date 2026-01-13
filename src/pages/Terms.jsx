@@ -117,7 +117,7 @@ export default function Terms() {
                         <p>
                             <strong>VPP Realtech</strong><br />
                             Email: legal@vpprealtech.com<br />
-                            Phone: +91 98765 43210<br />
+                            Phone: +91 75070 07875<br />
                             Address: Baner Road, Pune 411045, Maharashtra, India
                         </p>
                     </section>
