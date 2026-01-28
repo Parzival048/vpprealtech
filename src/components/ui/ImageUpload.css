@@ -85,12 +85,32 @@
 }
 
 .image-upload__error {
-    margin-top: 0.5rem;
-    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 1rem;
     background: rgba(239, 68, 68, 0.1);
     color: #dc2626;
     border-radius: var(--radius-md);
     font-size: 0.875rem;
+}
+
+.image-upload__error button {
+    background: none;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0;
+}
+
+.image-upload__previews {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .image-upload__grid {

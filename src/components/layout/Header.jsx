@@ -32,6 +32,7 @@ export default function Header() {
         { path: '/buyers', label: 'For Buyers' },
         { path: '/developers', label: 'For Developers' },
         { path: '/projects', label: 'Projects' },
+        { path: '/mandates', label: 'Mandates' },
         { path: '/blogs', label: 'Blog' },
         { path: '/about', label: 'About' },
         { path: '/contact', label: 'Contact' },

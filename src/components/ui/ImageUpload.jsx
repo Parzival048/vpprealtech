@@ -1,14 +1,16 @@
 /**
- * Image Upload Component using Supabase Storage
+ * Image Upload Component with S3 and Supabase Storage support
  */
 import { useState } from 'react';
 import { supabase } from '../../services/supabase';
+import { uploadToS3, isS3Configured } from '../../services/s3';
 import './ImageUpload.css';
 
 export default function ImageUpload({ images = [], onImagesChange, onChange, maxImages = 10, folder = 'projects' }) {
     const [uploading, setUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [dragOver, setDragOver] = useState(false);
+    const [error, setError] = useState('');
 
     // Support both onChange and onImagesChange props
     const handleImagesUpdate = (newImages) => {
@@ -34,12 +36,13 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
     const uploadFiles = async (files) => {
         if (files.length === 0) return;
         if (images.length + files.length > maxImages) {
-            alert(`Maximum ${maxImages} images allowed`);
+            setError(`Maximum ${maxImages} images allowed`);
             return;
         }
 
         setUploading(true);
         setUploadProgress(0);
+        setError('');
 
         const newImages = [...images];
         const totalFiles = files.length;
@@ -47,43 +50,80 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
 
         for (const file of files) {
             try {
-                // Create unique filename
-                const fileExt = file.name.split('.').pop();
-                const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
-                const filePath = `${folder}/${fileName}`;
+                let imageUrl = null;
 
-                // Upload to Supabase Storage
-                const { data, error } = await supabase.storage
-                    .from('images')
-                    .upload(filePath, file, {
-                        cacheControl: '3600',
-                        upsert: false,
-                    });
-
-                if (error) {
-                    console.error('Upload error:', error);
-                    continue;
+                // Try S3 first if configured
+                if (isS3Configured()) {
+                    const s3Result = await uploadToS3(file, folder);
+                    if (s3Result.success && s3Result.url) {
+                        imageUrl = s3Result.url;
+                    }
                 }
 
-                // Get public URL
-                const { data: urlData } = supabase.storage
-                    .from('images')
-                    .getPublicUrl(filePath);
+                // Fallback to Supabase Storage
+                if (!imageUrl) {
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+                    const filePath = `${folder}/${fileName}`;
 
-                if (urlData?.publicUrl) {
-                    newImages.push(urlData.publicUrl);
+                    const { data, error: uploadError } = await supabase.storage
+                        .from('images')
+                        .upload(filePath, file, {
+                            cacheControl: '3600',
+                            upsert: false,
+                        });
+
+                    if (!uploadError && data) {
+                        const { data: urlData } = supabase.storage
+                            .from('images')
+                            .getPublicUrl(filePath);
+
+                        if (urlData?.publicUrl) {
+                            imageUrl = urlData.publicUrl;
+                        }
+                    }
+                }
+
+                // Final fallback: base64 data URL
+                if (!imageUrl) {
+                    imageUrl = await readFileAsDataUrl(file);
+                }
+
+                if (imageUrl) {
+                    newImages.push(imageUrl);
                 }
 
                 completed++;
                 setUploadProgress(Math.round((completed / totalFiles) * 100));
-            } catch (error) {
-                console.error('Upload error:', error);
+            } catch (err) {
+                console.error('Upload error:', err);
+                // Try base64 as last resort
+                try {
+                    const dataUrl = await readFileAsDataUrl(file);
+                    if (dataUrl) {
+                        newImages.push(dataUrl);
+                    }
+                } catch (e) {
+                    console.error('Base64 fallback failed:', e);
+                }
+                completed++;
+                setUploadProgress(Math.round((completed / totalFiles) * 100));
             }
         }
 
         setUploading(false);
         setUploadProgress(0);
         handleImagesUpdate(newImages);
+    };
+
+    // Read file as base64 data URL
+    const readFileAsDataUrl = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
     };
 
     const removeImage = (index) => {
@@ -101,6 +141,14 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
 
     return (
         <div className="image-upload">
+            {/* Error Message */}
+            {error && (
+                <div className="image-upload__error">
+                    {error}
+                    <button type="button" onClick={() => setError('')}>×</button>
+                </div>
+            )}
+
             {/* Drop Zone */}
             <div
                 className={`image-upload__dropzone ${dragOver ? 'image-upload__dropzone--active' : ''} ${uploading ? 'image-upload__dropzone--uploading' : ''}`}
@@ -146,8 +194,15 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
             {images.length > 0 && (
                 <div className="image-upload__previews">
                     {images.map((url, index) => (
-                        <div key={url} className="image-upload__preview">
-                            <img src={url} alt={`Upload ${index + 1}`} />
+                        <div key={`${url}-${index}`} className="image-upload__preview">
+                            <img
+                                src={url}
+                                alt={`Upload ${index + 1}`}
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = 'https://via.placeholder.com/150x100?text=Image+Error';
+                                }}
+                            />
                             <div className="image-upload__preview-actions">
                                 {index > 0 && (
                                     <button type="button" onClick={() => moveImage(index, -1)} title="Move left">

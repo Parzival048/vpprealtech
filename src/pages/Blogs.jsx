@@ -4,6 +4,25 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getBlogs } from '../services/blogs';
 import './Blogs.css';
 
+// Category display name mapping
+const categoryLabels = {
+    'buyer-insights': 'Buyer Insights',
+    'micro-market-deep-dives': 'Micro-Market Deep Dives',
+    'market-intelligence': 'Market Intelligence',
+    'data-snapshots': 'Data Snapshots',
+    'buyer-mistakes': 'Buyer Mistakes',
+    'developer-playbook': 'Developer Playbook',
+    'opinion': 'Opinion',
+    'market-trends': 'Market Trends',
+    'buying-tips': 'Buying Tips',
+    'investment': 'Investment',
+    'legal': 'Legal & Documentation',
+    'news': 'News & Updates',
+};
+
+// Default placeholder image
+const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop';
+
 export default function Blogs() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,6 +47,16 @@ export default function Blogs() {
             month: 'long',
             day: 'numeric'
         });
+    };
+
+    const getCategoryLabel = (value) => {
+        return categoryLabels[value] || value || '';
+    };
+
+    // Handle image error - replace with placeholder
+    const handleImageError = (e) => {
+        e.target.onerror = null; // Prevent infinite loop
+        e.target.src = PLACEHOLDER_IMAGE;
     };
 
     return (
@@ -64,12 +93,13 @@ export default function Blogs() {
                                     <Link to={`/blogs/${blog.slug}`} className="blog-card__link">
                                         <div className="blog-card__image">
                                             <img
-                                                src={blog.featuredImage || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop'}
+                                                src={blog.featuredImage || PLACEHOLDER_IMAGE}
                                                 alt={blog.title}
                                                 loading="lazy"
+                                                onError={handleImageError}
                                             />
                                             {blog.category && (
-                                                <span className="blog-card__category">{blog.category}</span>
+                                                <span className="blog-card__category">{getCategoryLabel(blog.category)}</span>
                                             )}
                                         </div>
                                         <div className="blog-card__content">

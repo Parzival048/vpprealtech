@@ -9,6 +9,13 @@ import { AdminSidebar } from './Dashboard';
 import './Admin.css';
 
 const categoryOptions = [
+    { value: 'buyer-insights', label: 'Buyer Insights' },
+    { value: 'micro-market-deep-dives', label: 'Micro-Market Deep Dives' },
+    { value: 'market-intelligence', label: 'Market Intelligence' },
+    { value: 'data-snapshots', label: 'Data Snapshots' },
+    { value: 'buyer-mistakes', label: 'Buyer Mistakes' },
+    { value: 'developer-playbook', label: 'Developer Playbook' },
+    { value: 'opinion', label: 'Opinion' },
     { value: 'market-trends', label: 'Market Trends' },
     { value: 'buying-tips', label: 'Buying Tips' },
     { value: 'investment', label: 'Investment' },
@@ -30,6 +37,8 @@ export default function AdminBlogs() {
         category: '',
         author: '',
         featuredImage: '',
+        galleryImages: [],
+        sourceLink: '',
     });
 
     useEffect(() => {
@@ -59,7 +68,7 @@ export default function AdminBlogs() {
         setEditingBlog(null);
         setFormData({
             title: '', excerpt: '', content: '', category: '',
-            author: '', featuredImage: '',
+            author: '', featuredImage: '', galleryImages: [], sourceLink: '',
         });
         setShowModal(true);
     };
@@ -73,6 +82,8 @@ export default function AdminBlogs() {
             category: blog.category || '',
             author: blog.author || '',
             featuredImage: blog.featuredImage || '',
+            galleryImages: blog.galleryImages || [],
+            sourceLink: blog.sourceLink || '',
         });
         setShowModal(true);
     };
@@ -115,6 +126,12 @@ export default function AdminBlogs() {
         return date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
     };
 
+    // Get category label for display
+    const getCategoryLabel = (value) => {
+        const category = categoryOptions.find(opt => opt.value === value);
+        return category ? category.label : value || '-';
+    };
+
     return (
         <div className="admin-dashboard">
             <AdminSidebar />
@@ -146,7 +163,7 @@ export default function AdminBlogs() {
                                     {blogs.map((blog) => (
                                         <tr key={blog.id}>
                                             <td><strong>{blog.title}</strong></td>
-                                            <td>{blog.category || '-'}</td>
+                                            <td>{getCategoryLabel(blog.category)}</td>
                                             <td>{formatDate(blog.createdAt)}</td>
                                             <td>
                                                 <button
@@ -207,15 +224,40 @@ export default function AdminBlogs() {
                                     <Input label="Author" name="author" value={formData.author} onChange={handleChange} placeholder="VPP Realtech" />
                                 </div>
                                 <Textarea label="Excerpt" name="excerpt" value={formData.excerpt} onChange={handleChange} rows={2} placeholder="Brief summary of the article..." />
-                                <Textarea label="Content (HTML supported)" name="content" value={formData.content} onChange={handleChange} rows={10} placeholder="Write your blog content here..." required />
+                                <Textarea label="Content (HTML supported)" name="content" value={formData.content} onChange={handleChange} rows={10} placeholder="Write your blog content here. Use HTML tags for formatting:&#10;&#10;<h2>Heading</h2>&#10;<p>Paragraph text</p>&#10;<ul><li>List item</li></ul>&#10;<strong>Bold text</strong>" required />
+
+                                {/* Source Link */}
+                                <Input
+                                    label="Source Link (Optional)"
+                                    name="sourceLink"
+                                    value={formData.sourceLink}
+                                    onChange={handleChange}
+                                    placeholder="https://example.com/original-article"
+                                    type="url"
+                                />
 
                                 {/* Featured Image */}
-                                <ImageUpload
-                                    images={formData.featuredImage ? [formData.featuredImage] : []}
-                                    onImagesChange={(images) => setFormData(prev => ({ ...prev, featuredImage: images[0] || '' }))}
-                                    maxImages={1}
-                                    folder="blogs"
-                                />
+                                <div className="admin-form__section">
+                                    <label className="admin-form__label">Featured Image (Main Cover)</label>
+                                    <ImageUpload
+                                        images={formData.featuredImage ? [formData.featuredImage] : []}
+                                        onImagesChange={(images) => setFormData(prev => ({ ...prev, featuredImage: images[0] || '' }))}
+                                        maxImages={1}
+                                        folder="blogs"
+                                    />
+                                </div>
+
+                                {/* Gallery Images */}
+                                <div className="admin-form__section">
+                                    <label className="admin-form__label">Gallery Images (Additional Images)</label>
+                                    <p className="admin-form__hint">Add multiple images to create a professional image gallery in your blog post.</p>
+                                    <ImageUpload
+                                        images={formData.galleryImages || []}
+                                        onImagesChange={(images) => setFormData(prev => ({ ...prev, galleryImages: images }))}
+                                        maxImages={10}
+                                        folder="blogs"
+                                    />
+                                </div>
 
                                 <div className="admin-form__actions">
                                     <Button variant="ghost" type="button" onClick={() => setShowModal(false)}>Cancel</Button>

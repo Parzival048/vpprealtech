@@ -21,6 +21,8 @@ import Buyers from './pages/Buyers';
 import Developers from './pages/Developers';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import Mandates from './pages/Mandates';
+import MandateDetail from './pages/MandateDetail';
 import Blogs from './pages/Blogs';
 import BlogDetail from './pages/BlogDetail';
 import About from './pages/About';
@@ -33,6 +35,7 @@ import NotFound from './pages/NotFound';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProjects from './pages/admin/Projects';
+import AdminMandates from './pages/admin/Mandates';
 import AdminBlogs from './pages/admin/Blogs';
 import AdminLeads from './pages/admin/Leads';
 
@@ -103,6 +106,8 @@ function App() {
               <Route path="/developers" element={<PublicLayout><Developers /></PublicLayout>} />
               <Route path="/projects" element={<PublicLayout><Projects /></PublicLayout>} />
               <Route path="/projects/:slug" element={<PublicLayout><ProjectDetail /></PublicLayout>} />
+              <Route path="/mandates" element={<PublicLayout><Mandates /></PublicLayout>} />
+              <Route path="/mandates/:slug" element={<PublicLayout><MandateDetail /></PublicLayout>} />
               <Route path="/blogs" element={<PublicLayout><Blogs /></PublicLayout>} />
               <Route path="/blogs/:slug" element={<PublicLayout><BlogDetail /></PublicLayout>} />
               <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
@@ -114,6 +119,7 @@ function App() {
               <Route path="/admin" element={<AdminLayout><AdminLogin /></AdminLayout>} />
               <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
               <Route path="/admin/projects" element={<AdminLayout><AdminProjects /></AdminLayout>} />
+              <Route path="/admin/mandates" element={<AdminLayout><AdminMandates /></AdminLayout>} />
               <Route path="/admin/blogs" element={<AdminLayout><AdminBlogs /></AdminLayout>} />
               <Route path="/admin/leads" element={<AdminLayout><AdminLeads /></AdminLayout>} />
 

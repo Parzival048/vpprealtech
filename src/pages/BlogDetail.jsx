@@ -4,6 +4,63 @@ import Button from '../components/ui/Button';
 import { getBlogBySlug } from '../services/blogs';
 import './BlogDetail.css';
 
+// Process plain text content into HTML paragraphs
+function formatContent(content) {
+    if (!content) return '';
+
+    // If content already has HTML tags, return as-is
+    if (/<[a-z][\s\S]*>/i.test(content)) {
+        return content;
+    }
+
+    // Convert plain text with line breaks to HTML paragraphs
+    const paragraphs = content
+        .split(/\n\n+/) // Split on double line breaks
+        .map(para => para.trim())
+        .filter(para => para.length > 0)
+        .map(para => {
+            // Handle single line breaks within a paragraph
+            const formattedPara = para.replace(/\n/g, '<br />');
+
+            // Check if it looks like a heading (starts with — or is short + ends with punctuation-free)
+            if (para.startsWith('—') || para.startsWith('---') || para.startsWith('===')) {
+                return `<h3>${formattedPara.replace(/^[—\-=]+\s*/, '')}</h3>`;
+            }
+            if (para.includes(':') && para.length < 100 && !para.includes('.')) {
+                return `<h3>${formattedPara}</h3>`;
+            }
+
+            // Check for bullet points
+            if (para.startsWith('•') || para.startsWith('-') || para.startsWith('*')) {
+                const items = para.split(/\n/).map(item =>
+                    `<li>${item.replace(/^[•\-*]\s*/, '')}</li>`
+                ).join('');
+                return `<ul>${items}</ul>`;
+            }
+
+            return `<p>${formattedPara}</p>`;
+        })
+        .join('\n');
+
+    return paragraphs;
+}
+
+// Category display name mapping
+const categoryLabels = {
+    'buyer-insights': 'Buyer Insights',
+    'micro-market-deep-dives': 'Micro-Market Deep Dives',
+    'market-intelligence': 'Market Intelligence',
+    'data-snapshots': 'Data Snapshots',
+    'buyer-mistakes': 'Buyer Mistakes',
+    'developer-playbook': 'Developer Playbook',
+    'opinion': 'Opinion',
+    'market-trends': 'Market Trends',
+    'buying-tips': 'Buying Tips',
+    'investment': 'Investment',
+    'legal': 'Legal & Documentation',
+    'news': 'News & Updates',
+};
+
 export default function BlogDetail() {
     const { slug } = useParams();
     const [blog, setBlog] = useState(null);
@@ -29,6 +86,10 @@ export default function BlogDetail() {
             month: 'long',
             day: 'numeric'
         });
+    };
+
+    const getCategoryLabel = (value) => {
+        return categoryLabels[value] || value || '';
     };
 
     const handleShare = (platform) => {
@@ -74,6 +135,9 @@ export default function BlogDetail() {
         );
     }
 
+    // Process content for display
+    const formattedContent = formatContent(blog.content || blog.body || '');
+
     return (
         <main className="blog-detail-page">
             {/* Breadcrumb */}
@@ -92,7 +156,7 @@ export default function BlogDetail() {
                 <div className="container">
                     <div className="blog-hero__content">
                         {blog.category && (
-                            <span className="blog-hero__category">{blog.category}</span>
+                            <span className="blog-hero__category">{getCategoryLabel(blog.category)}</span>
                         )}
                         <h1 className="blog-hero__title">{blog.title}</h1>
                         <div className="blog-hero__meta">
@@ -128,7 +192,41 @@ export default function BlogDetail() {
             {blog.featuredImage && (
                 <section className="blog-featured-image">
                     <div className="container">
-                        <img src={blog.featuredImage} alt={blog.title} />
+                        <img
+                            src={blog.featuredImage}
+                            alt={blog.title}
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.style.display = 'none';
+                            }}
+                        />
+                    </div>
+                </section>
+            )}
+
+            {/* Image Gallery */}
+            {blog.galleryImages && blog.galleryImages.length > 0 && (
+                <section className="blog-gallery">
+                    <div className="container">
+                        <div className="blog-gallery__header">
+                            <h3>Image Gallery</h3>
+                            <span className="blog-gallery__count">{blog.galleryImages.length} images</span>
+                        </div>
+                        <div className="blog-gallery__grid">
+                            {blog.galleryImages.map((image, index) => (
+                                <div key={index} className="blog-gallery__item">
+                                    <img
+                                        src={image}
+                                        alt={`Gallery image ${index + 1}`}
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = 'https://via.placeholder.com/400x300?text=Image+Unavailable';
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </section>
             )}
@@ -140,8 +238,22 @@ export default function BlogDetail() {
                         <article className="blog-article">
                             <div
                                 className="blog-article__body"
-                                dangerouslySetInnerHTML={{ __html: blog.content || blog.body || '' }}
+                                dangerouslySetInnerHTML={{ __html: formattedContent }}
                             />
+
+                            {/* Source Link */}
+                            {blog.sourceLink && (
+                                <div className="blog-source">
+                                    <a href={blog.sourceLink} target="_blank" rel="noopener noreferrer">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                            <polyline points="15 3 21 3 21 9" />
+                                            <line x1="10" y1="14" x2="21" y2="3" />
+                                        </svg>
+                                        View Original Source
+                                    </a>
+                                </div>
+                            )}
                         </article>
 
                         {/* Sidebar */}

@@ -416,6 +416,24 @@
     gap: 1rem;
 }
 
+.admin-form__section {
+    margin-bottom: 1.5rem;
+}
+
+.admin-form__label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.admin-form__hint {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
 .admin-form__actions {
     display: flex;
     gap: 1rem;
