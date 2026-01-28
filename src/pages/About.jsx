@@ -82,7 +82,6 @@ const stats = [
 
 export default function About() {
     const [heroRef, heroVisible] = useScrollReveal();
-    const [storyRef, storyVisible] = useScrollReveal();
 
     return (
         <main className="about-page">
@@ -96,28 +95,20 @@ export default function About() {
                         <p className="about-hero__subtitle">
                             Clarity for Buyers. Results for Developers.
                         </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Story Section */}
-            <section className="about-story" ref={storyRef}>
-                <div className="container">
-                    <div className={`about-story__content-centered ${storyVisible ? 'visible' : ''}`}>
-                        <span className="section-eyebrow">Our Story</span>
-                        <h2>Built on Trust, Driven by Execution</h2>
-                        <p>
-                            At VPP Realtech, we believe real estate transactions should be driven by clarity,
-                            accountability, and results. Based in Pune, we operate as a real estate advisory
-                            and mandate sales partner, supporting homebuyers with honest guidance and developers
-                            with end-to-end sales execution.
-                        </p>
-                        <p>
-                            We collaborate closely with select developers as a mandate or sole selling partner,
-                            managing sales strategy, marketing coordination, and on-ground execution to ensure
-                            project success. For buyers, we offer curated, RERA-compliant properties backed by
-                            transparent advice and complete support.
-                        </p>
+                        <div className="about-hero__description">
+                            <p>
+                                At VPP Realtech, we believe real estate transactions should be driven by clarity,
+                                accountability, and results. Based in Pune, we operate as a real estate advisory
+                                and mandate sales partner, supporting homebuyers with honest guidance and developers
+                                with end-to-end sales execution.
+                            </p>
+                            <p>
+                                We collaborate closely with select developers as a mandate or sole selling partner,
+                                managing sales strategy, marketing coordination, and on-ground execution to ensure
+                                project success. For buyers, we offer curated, RERA-compliant properties backed by
+                                transparent advice and complete support.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
