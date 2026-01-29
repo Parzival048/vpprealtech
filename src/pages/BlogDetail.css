@@ -115,10 +115,10 @@
 
 /* Featured Image - Magazine Style */
 .blog-featured-image {
-    margin-top: -2rem;
-    padding: 0 1rem 3rem;
+    padding: 3rem 1rem 4rem;
     position: relative;
     z-index: 2;
+    background: var(--bg-primary);
 }
 
 .blog-featured-image img {
