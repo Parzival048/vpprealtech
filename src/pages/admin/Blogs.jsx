@@ -240,6 +240,7 @@ export default function AdminBlogs() {
                                 <div className="admin-form__section">
                                     <label className="admin-form__label">Featured Image (Main Cover)</label>
                                     <ImageUpload
+                                        id="featured-image-upload"
                                         images={formData.featuredImage ? [formData.featuredImage] : []}
                                         onImagesChange={(images) => setFormData(prev => ({ ...prev, featuredImage: images[0] || '' }))}
                                         maxImages={1}
@@ -252,6 +253,7 @@ export default function AdminBlogs() {
                                     <label className="admin-form__label">Gallery Images (Additional Images)</label>
                                     <p className="admin-form__hint">Add multiple images to create a professional image gallery in your blog post.</p>
                                     <ImageUpload
+                                        id="gallery-images-upload"
                                         images={formData.galleryImages || []}
                                         onImagesChange={(images) => setFormData(prev => ({ ...prev, galleryImages: images }))}
                                         maxImages={10}

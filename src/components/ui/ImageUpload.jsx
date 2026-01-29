@@ -1,16 +1,19 @@
 /**
  * Image Upload Component with S3 and Supabase Storage support
  */
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { supabase } from '../../services/supabase';
 import { uploadToS3, isS3Configured } from '../../services/s3';
 import './ImageUpload.css';
 
-export default function ImageUpload({ images = [], onImagesChange, onChange, maxImages = 10, folder = 'projects' }) {
+export default function ImageUpload({ images = [], onImagesChange, onChange, maxImages = 10, folder = 'projects', id }) {
     const [uploading, setUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [dragOver, setDragOver] = useState(false);
     const [error, setError] = useState('');
+
+    // Generate unique ID for this instance
+    const inputId = useMemo(() => id || `image-upload-${Math.random().toString(36).substring(2, 9)}`, [id]);
 
     // Support both onChange and onImagesChange props
     const handleImagesUpdate = (newImages) => {
@@ -186,9 +189,9 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
                     onChange={handleFileSelect}
                     disabled={uploading}
                     className="image-upload__input"
-                    id="image-upload-input"
+                    id={inputId}
                 />
-                <label htmlFor="image-upload-input" className="image-upload__label">
+                <label htmlFor={inputId} className="image-upload__label">
                     {uploading ? (
                         <>
                             <div className="image-upload__progress">
