@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Input, { Textarea, Select } from '../../components/ui/Input';
 import ImageUpload from '../../components/ui/ImageUpload';
+import RichTextEditor from '../../components/ui/RichTextEditor';
 import { getStoredUser } from '../../services/auth';
 import { getAllBlogs, createBlog, updateBlog, toggleBlogPublish, deleteBlog } from '../../services/blogs';
 import { AdminSidebar } from './Dashboard';
@@ -224,7 +225,16 @@ export default function AdminBlogs() {
                                     <Input label="Author" name="author" value={formData.author} onChange={handleChange} placeholder="VPP Realtech" />
                                 </div>
                                 <Textarea label="Excerpt" name="excerpt" value={formData.excerpt} onChange={handleChange} rows={2} placeholder="Brief summary of the article..." />
-                                <Textarea label="Content (HTML supported)" name="content" value={formData.content} onChange={handleChange} rows={10} placeholder="Write your blog content here. Use HTML tags for formatting:&#10;&#10;<h2>Heading</h2>&#10;<p>Paragraph text</p>&#10;<ul><li>List item</li></ul>&#10;<strong>Bold text</strong>" required />
+
+                                {/* Rich Text Editor for Content */}
+                                <div className="admin-form__section">
+                                    <label className="admin-form__label">Content *</label>
+                                    <RichTextEditor
+                                        value={formData.content}
+                                        onChange={(content) => setFormData(prev => ({ ...prev, content }))}
+                                        placeholder="Start writing your blog content. Select text and use the toolbar to format."
+                                    />
+                                </div>
 
                                 {/* Source Link */}
                                 <Input
