@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS blogs (
     category VARCHAR(100),
     author VARCHAR(255) DEFAULT 'VPP Realtech',
     featured_image TEXT,
+    gallery_images TEXT[] DEFAULT '{}',
+    source_link TEXT,
     reading_time INTEGER DEFAULT 1,
     published BOOLEAN DEFAULT false,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),

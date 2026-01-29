@@ -47,6 +47,7 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
         const newImages = [...images];
         const totalFiles = files.length;
         let completed = 0;
+        let uploadErrors = [];
 
         for (const file of files) {
             try {
@@ -54,14 +55,21 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
 
                 // Try S3 first if configured
                 if (isS3Configured()) {
+                    console.log('Attempting S3 upload for:', file.name);
                     const s3Result = await uploadToS3(file, folder);
+                    console.log('S3 result:', s3Result);
                     if (s3Result.success && s3Result.url) {
                         imageUrl = s3Result.url;
+                        console.log('S3 upload successful:', imageUrl);
+                    } else {
+                        console.warn('S3 upload failed:', s3Result.error);
+                        uploadErrors.push(`S3: ${s3Result.error || 'Unknown error'}`);
                     }
                 }
 
                 // Fallback to Supabase Storage
                 if (!imageUrl) {
+                    console.log('Attempting Supabase Storage upload for:', file.name);
                     const fileExt = file.name.split('.').pop();
                     const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
                     const filePath = `${folder}/${fileName}`;
@@ -73,6 +81,11 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
                             upsert: false,
                         });
 
+                    if (uploadError) {
+                        console.warn('Supabase upload error:', uploadError);
+                        uploadErrors.push(`Supabase: ${uploadError.message}`);
+                    }
+
                     if (!uploadError && data) {
                         const { data: urlData } = supabase.storage
                             .from('images')
@@ -80,13 +93,16 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
 
                         if (urlData?.publicUrl) {
                             imageUrl = urlData.publicUrl;
+                            console.log('Supabase upload successful:', imageUrl);
                         }
                     }
                 }
 
                 // Final fallback: base64 data URL
                 if (!imageUrl) {
+                    console.log('Using base64 fallback for:', file.name);
                     imageUrl = await readFileAsDataUrl(file);
+                    console.log('Base64 data URL created, length:', imageUrl?.length);
                 }
 
                 if (imageUrl) {
@@ -97,11 +113,13 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
                 setUploadProgress(Math.round((completed / totalFiles) * 100));
             } catch (err) {
                 console.error('Upload error:', err);
+                uploadErrors.push(`Error: ${err.message}`);
                 // Try base64 as last resort
                 try {
                     const dataUrl = await readFileAsDataUrl(file);
                     if (dataUrl) {
                         newImages.push(dataUrl);
+                        console.log('Base64 fallback successful');
                     }
                 } catch (e) {
                     console.error('Base64 fallback failed:', e);
@@ -109,6 +127,11 @@ export default function ImageUpload({ images = [], onImagesChange, onChange, max
                 completed++;
                 setUploadProgress(Math.round((completed / totalFiles) * 100));
             }
+        }
+
+        // Show error if all uploads used fallback
+        if (uploadErrors.length > 0 && uploadErrors.length === files.length) {
+            console.warn('All uploads required fallback. Errors:', uploadErrors);
         }
 
         setUploading(false);

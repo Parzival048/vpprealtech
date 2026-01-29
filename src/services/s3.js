@@ -5,7 +5,7 @@
 
 // S3 Configuration from environment variables
 const AWS_REGION = import.meta.env.VITE_AWS_REGION || 'ap-south-1';
-const S3_BUCKET = import.meta.env.VITE_AWS_S3_BUCKET || 'vppimages';
+const S3_BUCKET = import.meta.env.VITE_AWS_S3_BUCKET || '';
 const AWS_ACCESS_KEY = import.meta.env.VITE_AWS_ACCESS_KEY_ID || '';
 const AWS_SECRET_KEY = import.meta.env.VITE_AWS_SECRET_ACCESS_KEY || '';
 
@@ -16,18 +16,27 @@ function getS3Url(key) {
 
 // Check if S3 is configured
 export function isS3Configured() {
-    return !!(AWS_ACCESS_KEY && AWS_SECRET_KEY && S3_BUCKET);
+    // Check if all required values are present and not placeholder values
+    const hasCredentials = AWS_ACCESS_KEY && AWS_SECRET_KEY && S3_BUCKET;
+    const notPlaceholders = !AWS_ACCESS_KEY.includes('your_') &&
+        !AWS_SECRET_KEY.includes('your_') &&
+        !S3_BUCKET.includes('your_');
+    return !!(hasCredentials && notPlaceholders);
 }
 
 /**
  * Upload file to S3
+ * Note: Direct browser uploads require the S3 bucket to have:
+ * 1. CORS configuration allowing your domain
+ * 2. Bucket policy allowing public PUT (or use pre-signed URLs)
+ * 
  * @param {File} file - File to upload
  * @param {string} folder - Folder path in bucket (e.g., 'blogs', 'projects')
  * @returns {Promise<{success: boolean, url?: string, error?: string}>}
  */
 export async function uploadToS3(file, folder = 'uploads') {
     if (!isS3Configured()) {
-        return { success: false, error: 'S3 not configured. Please add AWS credentials to environment variables.' };
+        return { success: false, error: 'S3 not configured' };
     }
 
     try {
@@ -35,32 +44,33 @@ export async function uploadToS3(file, folder = 'uploads') {
         const fileExt = file.name.split('.').pop();
         const fileName = `${folder}/${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
 
-        // Create the signature for AWS S3
-        const timestamp = new Date().toISOString().replace(/[:-]|\.\d{3}/g, '');
-        const dateStamp = timestamp.substring(0, 8);
-
-        // For simplicity, we'll use the AWS SDK approach through a serverless function
-        // Or use direct PUT with proper CORS configuration on S3 bucket
-
-        // Using fetch with presigned-like approach (requires proper bucket policy)
         const uploadUrl = getS3Url(fileName);
+
+        // Using fetch with a timeout to prevent hanging
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
         const response = await fetch(uploadUrl, {
             method: 'PUT',
             body: file,
             headers: {
                 'Content-Type': file.type,
-                'x-amz-acl': 'public-read',
             },
+            signal: controller.signal,
         });
+
+        clearTimeout(timeoutId);
 
         if (response.ok) {
             return { success: true, url: uploadUrl };
         } else {
-            // If direct upload fails, try using base64 approach for smaller files
-            return await uploadAsBase64(file, folder);
+            const errorText = await response.text().catch(() => 'Unknown error');
+            return { success: false, error: `S3 upload failed (${response.status}): ${errorText}` };
         }
     } catch (error) {
+        if (error.name === 'AbortError') {
+            return { success: false, error: 'S3 upload timed out' };
+        }
         console.error('S3 upload error:', error);
         return { success: false, error: error.message };
     }
