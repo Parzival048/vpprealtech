@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Button, { WhatsAppButton } from '../components/ui/Button';
 import Input, { Textarea, Select } from '../components/ui/Input';
 import { FeatureCard } from '../components/ui/Card';
@@ -104,6 +105,7 @@ const propertyTypeOptions = [
 ];
 
 export default function Buyers() {
+    const location = useLocation();
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -118,6 +120,15 @@ export default function Buyers() {
 
     const [heroRef, heroVisible] = useScrollReveal();
     const [journeyRef, journeyVisible] = useScrollReveal();
+
+    // Handle hash navigation to form section
+    useEffect(() => {
+        if (location.hash === '#buyer-form-section') {
+            setTimeout(() => {
+                document.getElementById('buyer-form-section')?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }, [location]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -177,6 +188,13 @@ export default function Buyers() {
                             >
                                 Start Your Search
                             </WhatsAppButton>
+                            <Button
+                                variant="outline"
+                                size="lg"
+                                onClick={() => document.getElementById('buyer-form-section')?.scrollIntoView({ behavior: 'smooth' })}
+                            >
+                                Fill Enquiry Form
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -265,7 +283,7 @@ export default function Buyers() {
             </section>
 
             {/* Lead Form Section */}
-            <section className="buyer-form-section">
+            <section className="buyer-form-section" id="buyer-form-section">
                 <div className="container">
                     <div className="buyer-form-container">
                         <div className="buyer-form-info">
@@ -308,7 +326,7 @@ export default function Buyers() {
                             </div>
                         </div>
 
-                        <form className="buyer-form" onSubmit={handleSubmit}>
+                        <form className="buyer-form" id="buyer-form" onSubmit={handleSubmit}>
                             <Input
                                 label="Full Name"
                                 name="name"

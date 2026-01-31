@@ -5,7 +5,7 @@ import { ProjectCard, FeatureCard, StatCard } from '../components/ui/Card';
 import { useScrollReveal, useStaggeredReveal } from '../hooks/useScrollReveal';
 import { openWhatsApp } from '../utils/whatsapp';
 import { getFeaturedProjects } from '../services/projects';
-import logoImg from '../assets/vpppng.png';
+import logoImg from '../assets/vpplogo.png';
 import client1 from '../assets/client1.png';
 import client2 from '../assets/client2.png';
 import client3 from '../assets/client3.png';

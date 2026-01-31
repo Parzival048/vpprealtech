@@ -1,0 +1,85 @@
+/* Enquiry Float Button - Positioned above WhatsApp */
+.enquiry-float {
+    position: fixed;
+    bottom: 90px;
+    right: 24px;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, #e55a2b 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    transition: all var(--transition-base);
+}
+
+.enquiry-float:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+    color: white;
+}
+
+.enquiry-float__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background: var(--primary);
+    animation: enquiryPulse 2s ease-in-out infinite;
+    z-index: -1;
+}
+
+.enquiry-float__icon {
+    display: flex;
+    width: 22px;
+    height: 22px;
+}
+
+.enquiry-float__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.enquiry-float__text {
+    display: block;
+}
+
+@keyframes enquiryPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .enquiry-float {
+        bottom: 80px;
+        right: 16px;
+        padding: 14px;
+        border-radius: 50%;
+    }
+
+    .enquiry-float__text {
+        display: none;
+    }
+
+    .enquiry-float__icon {
+        width: 26px;
+        height: 26px;
+    }
+}

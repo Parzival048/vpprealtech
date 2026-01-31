@@ -123,18 +123,30 @@ export async function createMandate(mandateData) {
     try {
         const slug = generateSlug(mandateData.title);
 
+        // Handle both array and single value for developers
+        const developers = Array.isArray(mandateData.developers)
+            ? mandateData.developers.filter(d => d.trim())
+            : (mandateData.developer ? [mandateData.developer] : []);
+
+        // Handle both array and single value for reraIds
+        const reraIds = Array.isArray(mandateData.reraIds)
+            ? mandateData.reraIds.filter(r => r.trim())
+            : (mandateData.reraId ? [mandateData.reraId] : []);
+
         const { data, error } = await supabase
             .from('mandates')
             .insert([{
                 slug,
                 title: mandateData.title,
-                developer: mandateData.developer || '',
+                developer: developers.join(', '),  // Store as comma-separated for backward compat
+                developers: developers,  // Also store as array
                 location: mandateData.location,
                 address: mandateData.address || '',
                 type: mandateData.type,
                 status: mandateData.status,
                 price_range: mandateData.priceRange || '',
-                rera_id: mandateData.reraId || '',
+                rera_id: reraIds.join(', '),  // Store as comma-separated for backward compat
+                rera_ids: reraIds,  // Also store as array
                 possession: mandateData.possession || '',
                 configurations: mandateData.configurations || [],
                 sizes: mandateData.sizes || '',
@@ -165,17 +177,29 @@ export async function createMandate(mandateData) {
 // Update mandate (admin)
 export async function updateMandate(id, mandateData) {
     try {
+        // Handle both array and single value for developers
+        const developers = Array.isArray(mandateData.developers)
+            ? mandateData.developers.filter(d => d.trim())
+            : (mandateData.developer ? [mandateData.developer] : []);
+
+        // Handle both array and single value for reraIds
+        const reraIds = Array.isArray(mandateData.reraIds)
+            ? mandateData.reraIds.filter(r => r.trim())
+            : (mandateData.reraId ? [mandateData.reraId] : []);
+
         const { error } = await supabase
             .from('mandates')
             .update({
                 title: mandateData.title,
-                developer: mandateData.developer,
+                developer: developers.join(', '),
+                developers: developers,
                 location: mandateData.location,
                 address: mandateData.address,
                 type: mandateData.type,
                 status: mandateData.status,
                 price_range: mandateData.priceRange,
-                rera_id: mandateData.reraId,
+                rera_id: reraIds.join(', '),
+                rera_ids: reraIds,
                 possession: mandateData.possession,
                 configurations: mandateData.configurations,
                 sizes: mandateData.sizes,
@@ -256,17 +280,32 @@ export async function deleteMandate(id) {
 // Transform database row to frontend format
 function transformMandate(row) {
     if (!row) return null;
+
+    // Handle both array and string formats for developers
+    let developers = row.developers || [];
+    if (!Array.isArray(developers) && row.developer) {
+        developers = row.developer.split(',').map(d => d.trim()).filter(d => d);
+    }
+
+    // Handle both array and string formats for reraIds
+    let reraIds = row.rera_ids || [];
+    if (!Array.isArray(reraIds) && row.rera_id) {
+        reraIds = row.rera_id.split(',').map(r => r.trim()).filter(r => r);
+    }
+
     return {
         id: row.id,
         slug: row.slug,
         title: row.title,
-        developer: row.developer,
+        developer: row.developer,  // Keep for backward compatibility
+        developers: developers,
         location: row.location,
         address: row.address,
         type: row.type,
         status: row.status,
         priceRange: row.price_range,
-        reraId: row.rera_id,
+        reraId: row.rera_id,  // Keep for backward compatibility
+        reraIds: reraIds,
         possession: row.possession,
         configurations: row.configurations || [],
         sizes: row.sizes,

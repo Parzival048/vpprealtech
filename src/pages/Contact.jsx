@@ -125,7 +125,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <h3>Business Hours</h3>
-                                    <p>Monday - Saturday<br />10:00 AM - 7:00 PM</p>
+                                    <p>Monday - Sunday<br />10:00 AM - 7:00 PM</p>
                                 </div>
                             </div>
 

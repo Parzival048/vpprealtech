@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import Button from '../ui/Button';
 import { openWhatsApp } from '../../utils/whatsapp';
-import logoImg from '../../assets/vpppng.png';
+import logoImg from '../../assets/vpplogo.png';
 import './Header.css';
 
 /**

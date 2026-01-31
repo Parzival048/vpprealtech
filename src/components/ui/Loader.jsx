@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import logoImg from '../../assets/vpppng.png';
+import logoImg from '../../assets/vpplogo.png';
 import './Loader.css';
 
 /**

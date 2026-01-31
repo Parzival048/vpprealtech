@@ -18,6 +18,7 @@ const statusOptions = [
     { value: 'upcoming', label: 'Upcoming' },
     { value: 'ongoing', label: 'Ongoing' },
     { value: 'ready', label: 'Ready to Move' },
+    { value: 'sold-out', label: 'Sold Out' },
 ];
 
 const partnershipOptions = [
@@ -35,13 +36,13 @@ export default function AdminMandates() {
     const [saving, setSaving] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
-        developer: '',
+        developers: [''],  // Array for multiple developers
         location: '',
         address: '',
         type: '',
         status: '',
         priceRange: '',
-        reraId: '',
+        reraIds: [''],  // Array for multiple RERA IDs
         possession: '',
         overview: '',
         partnershipType: '',
@@ -79,8 +80,8 @@ export default function AdminMandates() {
     const openAddModal = () => {
         setEditingMandate(null);
         setFormData({
-            title: '', developer: '', location: '', address: '', type: '', status: '',
-            priceRange: '', reraId: '', possession: '',
+            title: '', developers: [''], location: '', address: '', type: '', status: '',
+            priceRange: '', reraIds: [''], possession: '',
             overview: '', partnershipType: '', featured: false,
             images: [], videoUrl: '',
         });
@@ -89,15 +90,19 @@ export default function AdminMandates() {
 
     const openEditModal = (mandate) => {
         setEditingMandate(mandate);
+        // Handle both old single value and new array format
+        const developers = mandate.developers || (mandate.developer ? [mandate.developer] : ['']);
+        const reraIds = mandate.reraIds || (mandate.reraId ? [mandate.reraId] : ['']);
+
         setFormData({
             title: mandate.title || '',
-            developer: mandate.developer || '',
+            developers: developers.length > 0 ? developers : [''],
             location: mandate.location || '',
             address: mandate.address || '',
             type: mandate.type || '',
             status: mandate.status || '',
             priceRange: mandate.priceRange || '',
-            reraId: mandate.reraId || '',
+            reraIds: reraIds.length > 0 ? reraIds : [''],
             possession: mandate.possession || '',
             overview: mandate.overview || '',
             partnershipType: mandate.partnershipType || '',
@@ -106,6 +111,29 @@ export default function AdminMandates() {
             videoUrl: mandate.videoUrl || '',
         });
         setShowModal(true);
+    };
+
+    // Handle array field changes (developers, reraIds)
+    const handleArrayFieldChange = (field, index, value) => {
+        setFormData(prev => {
+            const newArray = [...prev[field]];
+            newArray[index] = value;
+            return { ...prev, [field]: newArray };
+        });
+    };
+
+    const addArrayField = (field) => {
+        setFormData(prev => ({
+            ...prev,
+            [field]: [...prev[field], '']
+        }));
+    };
+
+    const removeArrayField = (field, index) => {
+        setFormData(prev => {
+            const newArray = prev[field].filter((_, i) => i !== index);
+            return { ...prev, [field]: newArray.length > 0 ? newArray : [''] };
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -183,8 +211,8 @@ export default function AdminMandates() {
                                                 </span>
                                             </td>
                                             <td>
-                                                <span className={`admin-status admin-status--${mandate.status === 'ready' ? 'published' : 'draft'}`}>
-                                                    {mandate.status === 'ready' ? 'Ready' : mandate.status === 'ongoing' ? 'Ongoing' : 'Upcoming'}
+                                                <span className={`admin-status admin-status--${mandate.status === 'ready' ? 'published' : mandate.status === 'sold-out' ? 'sold' : 'draft'}`}>
+                                                    {mandate.status === 'ready' ? 'Ready' : mandate.status === 'ongoing' ? 'Ongoing' : mandate.status === 'sold-out' ? 'Sold Out' : 'Upcoming'}
                                                 </span>
                                             </td>
                                             <td>
@@ -241,14 +269,53 @@ export default function AdminMandates() {
                             </div>
                             <form onSubmit={handleSubmit}>
                                 <Input label="Project Title" name="title" value={formData.title} onChange={handleChange} required />
+
+                                {/* Multiple Developers */}
+                                <div className="admin-form__section">
+                                    <label className="admin-form__label">Developer Name(s) *</label>
+                                    {formData.developers.map((dev, index) => (
+                                        <div key={index} className="admin-form__array-row">
+                                            <input
+                                                type="text"
+                                                value={dev}
+                                                onChange={(e) => handleArrayFieldChange('developers', index, e.target.value)}
+                                                placeholder={`Developer ${index + 1}`}
+                                                className="admin-form__input"
+                                                required={index === 0}
+                                            />
+                                            {formData.developers.length > 1 && (
+                                                <button type="button" className="admin-form__remove-btn" onClick={() => removeArrayField('developers', index)}>×</button>
+                                            )}
+                                        </div>
+                                    ))}
+                                    <button type="button" className="admin-form__add-btn" onClick={() => addArrayField('developers')}>+ Add Developer</button>
+                                </div>
+
                                 <div className="admin-form__row">
-                                    <Input label="Developer Name" name="developer" value={formData.developer} onChange={handleChange} required />
                                     <Select label="Partnership Type" name="partnershipType" value={formData.partnershipType} onChange={handleChange} options={partnershipOptions} required />
-                                </div>
-                                <div className="admin-form__row">
                                     <Input label="Location" name="location" value={formData.location} onChange={handleChange} required />
-                                    <Input label="RERA ID" name="reraId" value={formData.reraId} onChange={handleChange} />
                                 </div>
+
+                                {/* Multiple RERA IDs */}
+                                <div className="admin-form__section">
+                                    <label className="admin-form__label">RERA ID(s)</label>
+                                    {formData.reraIds.map((rera, index) => (
+                                        <div key={index} className="admin-form__array-row">
+                                            <input
+                                                type="text"
+                                                value={rera}
+                                                onChange={(e) => handleArrayFieldChange('reraIds', index, e.target.value)}
+                                                placeholder={`RERA ID ${index + 1}`}
+                                                className="admin-form__input"
+                                            />
+                                            {formData.reraIds.length > 1 && (
+                                                <button type="button" className="admin-form__remove-btn" onClick={() => removeArrayField('reraIds', index)}>×</button>
+                                            )}
+                                        </div>
+                                    ))}
+                                    <button type="button" className="admin-form__add-btn" onClick={() => addArrayField('reraIds')}>+ Add RERA ID</button>
+                                </div>
+
                                 <Input label="Address" name="address" value={formData.address} onChange={handleChange} />
                                 <div className="admin-form__row">
                                     <Select label="Property Type" name="type" value={formData.type} onChange={handleChange} options={typeOptions} required />

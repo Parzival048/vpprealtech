@@ -26,10 +26,9 @@ export function generateOrganizationSchema() {
             longitude: '73.8567',
         },
         sameAs: [
-            // Add your social media URLs here
-            'https://facebook.com/vpprealtech',
-            'https://instagram.com/vpprealtech',
-            'https://linkedin.com/company/vpprealtech',
+            'https://www.instagram.com/vpp_realtech',
+            'https://www.linkedin.com/company/vpp-realtech/',
+            'https://youtube.com/@vpprealtech',
         ],
     };
 }
@@ -99,7 +98,7 @@ export function generateArticleSchema(blog) {
             name: 'VPP Realtech',
             logo: {
                 '@type': 'ImageObject',
-                url: `${baseUrl}/logo.png`,
+                url: `${baseUrl}/vpplogo.png`,
             },
         },
         datePublished: blog.createdAt,

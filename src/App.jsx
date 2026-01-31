@@ -6,6 +6,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Loader from './components/ui/Loader';
 import WhatsAppFloat from './components/ui/WhatsAppFloat';
+import EnquiryFloat from './components/ui/EnquiryFloat';
 import { ToastProvider } from './components/ui/Toast';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 
@@ -62,6 +63,7 @@ function PublicLayout({ children }) {
       <Header />
       {children}
       <Footer />
+      <EnquiryFloat />
       <WhatsAppFloat />
     </>
   );
